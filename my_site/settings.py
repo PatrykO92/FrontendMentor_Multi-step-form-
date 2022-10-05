@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from environs import Env
 from pathlib import Path
 
+
 env = Env()
 env.read_env()
 
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # my apps
+    'blog.apps.BlogConfig',
 ]
 
 MIDDLEWARE = [
