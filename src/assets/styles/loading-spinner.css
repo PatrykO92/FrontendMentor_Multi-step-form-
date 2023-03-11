@@ -1,0 +1,196 @@
+.loading-spinner {
+  min-width: 100%;
+  min-height: inherit;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  min-width: 100px;
+  min-height: 100px;
+  border-radius: 50%;
+
+  animation: spinner 0.2s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    background: radial-gradient(
+        closest-side,
+        white 0%,
+        white 80%,
+        transparent 80%,
+        transparent 100%
+      ),
+      linear-gradient(
+        0deg,
+        transparent 0%,
+        transparent 75%,
+        var(--primary-color1) 75%,
+        var(--primary-color1) 100%
+      );
+  }
+  10% {
+    background: radial-gradient(
+        closest-side,
+        white 0%,
+        white 80%,
+        transparent 80%,
+        transparent 100%
+      ),
+      linear-gradient(
+        36deg,
+        transparent 0%,
+        transparent 75%,
+        var(--primary-color1) 75%,
+        var(--primary-color1) 100%
+      );
+  }
+  20% {
+    background: radial-gradient(
+        closest-side,
+        white 0%,
+        white 80%,
+        transparent 80%,
+        transparent 100%
+      ),
+      linear-gradient(
+        72deg,
+        transparent 0%,
+        transparent 75%,
+        var(--primary-color1) 75%,
+        var(--primary-color1) 100%
+      );
+  }
+  30% {
+    background: radial-gradient(
+        closest-side,
+        white 0%,
+        white 80%,
+        transparent 80%,
+        transparent 100%
+      ),
+      linear-gradient(
+        108deg,
+        transparent 0%,
+        transparent 75%,
+        var(--primary-color1) 75%,
+        var(--primary-color1) 100%
+      );
+  }
+  40% {
+    background: radial-gradient(
+        closest-side,
+        white 0%,
+        white 80%,
+        transparent 80%,
+        transparent 100%
+      ),
+      linear-gradient(
+        144deg,
+        transparent 0%,
+        transparent 75%,
+        var(--primary-color1) 75%,
+        var(--primary-color1) 100%
+      );
+  }
+  50% {
+    background: radial-gradient(
+        closest-side,
+        white 0%,
+        white 80%,
+        transparent 80%,
+        transparent 100%
+      ),
+      linear-gradient(
+        180deg,
+        transparent 0%,
+        transparent 75%,
+        var(--primary-color1) 75%,
+        var(--primary-color1) 100%
+      );
+  }
+  60% {
+    background: radial-gradient(
+        closest-side,
+        white 0%,
+        white 80%,
+        transparent 80%,
+        transparent 100%
+      ),
+      linear-gradient(
+        216deg,
+        transparent 0%,
+        transparent 75%,
+        var(--primary-color1) 75%,
+        var(--primary-color1) 100%
+      );
+  }
+  70% {
+    background: radial-gradient(
+        closest-side,
+        white 0%,
+        white 80%,
+        transparent 80%,
+        transparent 100%
+      ),
+      linear-gradient(
+        252deg,
+        transparent 0%,
+        transparent 75%,
+        var(--primary-color1) 75%,
+        var(--primary-color1) 100%
+      );
+  }
+  80% {
+    background: radial-gradient(
+        closest-side,
+        white 0%,
+        white 80%,
+        transparent 80%,
+        transparent 100%
+      ),
+      linear-gradient(
+        288deg,
+        transparent 0%,
+        transparent 75%,
+        var(--primary-color1) 75%,
+        var(--primary-color1) 100%
+      );
+  }
+  90% {
+    background: radial-gradient(
+        closest-side,
+        white 0%,
+        white 80%,
+        transparent 80%,
+        transparent 100%
+      ),
+      linear-gradient(
+        324deg,
+        transparent 0%,
+        transparent 75%,
+        var(--primary-color1) 75%,
+        var(--primary-color1) 100%
+      );
+  }
+  100% {
+    background: radial-gradient(
+        closest-side,
+        white 0%,
+        white 80%,
+        transparent 80%,
+        transparent 100%
+      ),
+      linear-gradient(
+        360deg,
+        transparent 0%,
+        transparent 75%,
+        var(--primary-color1) 75%,
+        var(--primary-color1) 100%
+      );
+  }
+}

@@ -1,3 +1,4 @@
 import Form from "./Form";
+import LoadingSpinner from "./LoadingSpinner";
 
-export { Form };
+export { Form, LoadingSpinner };
