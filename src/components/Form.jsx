@@ -17,13 +17,40 @@ const Form = () => {
     4: ["Finishing up", "Double-check everything looks OK before confirming."],
   };
 
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    plan: "Arcade",
+    addons: {
+      onlineService: false,
+      largerStorage: false,
+      customizableProfile: false,
+    },
+  });
+
   const [isLoading, setIsLoading] = useState(false);
   const [actualStep, setActualStep] = useState(1);
   const [monthlyPayment, setMonthlyPayment] = useState(true);
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    //added handling for checkbox/addons
+    if (event.target.type === "checkbox") {
+      setForm((prevForm) => ({
+        ...prevForm,
+        addons: { ...prevForm.addons, [name]: !form.addons.name },
+      }));
+    } else {
+      setForm((prevForm) => ({ ...prevForm, [name]: value }));
+    }
+  };
+
   return (
     <div className="form-container">
       <div className="form-side-bar">
+        <button onClick={() => console.log(form)}>test button</button>
         <div>
           <button
             onClick={() => {
@@ -90,6 +117,9 @@ const Form = () => {
               <label>
                 Name
                 <input
+                  name="name"
+                  value={form.name}
+                  onChange={handleInputChange}
                   type="text"
                   placeholder="e.g. Stephen King"
                   required
@@ -98,6 +128,9 @@ const Form = () => {
               <label>
                 Email Addres
                 <input
+                  name="email"
+                  value={form.email}
+                  onChange={handleInputChange}
                   type="email"
                   placeholder="e.g. stephenking@lorem.com"
                   required
@@ -106,6 +139,9 @@ const Form = () => {
               <label>
                 Phone Number
                 <input
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleInputChange}
                   type="tel"
                   placeholder="e.g. +1 234 567 890"
                   required
@@ -118,7 +154,13 @@ const Form = () => {
             <div className="form-select-plan">
               <div>
                 <div>
-                  <input type="radio" id="plan-1" name="plan" value="1" />
+                  <input
+                    type="radio"
+                    id="plan-1"
+                    name="plan"
+                    value="Arcade"
+                    onChange={handleInputChange}
+                  />
                   <label htmlFor="plan-1">
                     Arcade
                     {monthlyPayment ? (
@@ -133,7 +175,13 @@ const Form = () => {
                   </label>
                 </div>
                 <div>
-                  <input type="radio" id="plan-2" name="plan" value="2" />
+                  <input
+                    type="radio"
+                    id="plan-2"
+                    name="plan"
+                    value="Advanced"
+                    onChange={handleInputChange}
+                  />
                   <label htmlFor="plan-2">
                     Advanced
                     {monthlyPayment ? (
@@ -148,7 +196,13 @@ const Form = () => {
                   </label>
                 </div>
                 <div>
-                  <input type="radio" id="plan-3" name="plan" value="3" />
+                  <input
+                    type="radio"
+                    id="plan-3"
+                    name="plan"
+                    value="Pro"
+                    onChange={handleInputChange}
+                  />
                   <label htmlFor="plan-3">
                     Pro
                     {monthlyPayment ? (
@@ -186,7 +240,9 @@ const Form = () => {
                 <input
                   type="checkbox"
                   id="online-services"
-                  name="online-services"
+                  name="onlineService"
+                  value="Online service"
+                  onChange={handleInputChange}
                 />
                 <label htmlFor="online-services">
                   <div>
@@ -201,7 +257,9 @@ const Form = () => {
                 <input
                   type="checkbox"
                   id="larger-storage"
-                  name="larger-storage"
+                  name="largerStorage"
+                  value="Larger storage"
+                  onChange={handleInputChange}
                 />
                 <label htmlFor="larger-storage">
                   <div>
@@ -216,7 +274,9 @@ const Form = () => {
                 <input
                   type="checkbox"
                   id="custom-profile"
-                  name="custom-profile"
+                  name="customizableProfile"
+                  value="Customizable profile"
+                  onChange={handleInputChange}
                 />
                 <label htmlFor="custom-profile">
                   <div>
