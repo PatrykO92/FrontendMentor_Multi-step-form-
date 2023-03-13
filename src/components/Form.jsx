@@ -40,7 +40,7 @@ const Form = () => {
     if (event.target.type === "checkbox") {
       setForm((prevForm) => ({
         ...prevForm,
-        addons: { ...prevForm.addons, [name]: !form.addons.name },
+        addons: { ...prevForm.addons, [name]: !form.addons[name] },
       }));
     } else {
       setForm((prevForm) => ({ ...prevForm, [name]: value }));
@@ -160,6 +160,7 @@ const Form = () => {
                     name="plan"
                     value="Arcade"
                     onChange={handleInputChange}
+                    checked={form.plan === "Arcade"}
                   />
                   <label htmlFor="plan-1">
                     Arcade
@@ -181,6 +182,7 @@ const Form = () => {
                     name="plan"
                     value="Advanced"
                     onChange={handleInputChange}
+                    checked={form.plan === "Advanced"}
                   />
                   <label htmlFor="plan-2">
                     Advanced
@@ -202,6 +204,7 @@ const Form = () => {
                     name="plan"
                     value="Pro"
                     onChange={handleInputChange}
+                    checked={form.plan === "Pro"}
                   />
                   <label htmlFor="plan-3">
                     Pro
@@ -241,8 +244,9 @@ const Form = () => {
                   type="checkbox"
                   id="online-services"
                   name="onlineService"
-                  value="Online service"
+                  value={"Online service"}
                   onChange={handleInputChange}
+                  checked={form.addons.onlineService}
                 />
                 <label htmlFor="online-services">
                   <div>
@@ -260,6 +264,7 @@ const Form = () => {
                   name="largerStorage"
                   value="Larger storage"
                   onChange={handleInputChange}
+                  checked={form.addons.largerStorage}
                 />
                 <label htmlFor="larger-storage">
                   <div>
@@ -277,6 +282,7 @@ const Form = () => {
                   name="customizableProfile"
                   value="Customizable profile"
                   onChange={handleInputChange}
+                  checked={form.addons.customizableProfile}
                 />
                 <label htmlFor="custom-profile">
                   <div>
