@@ -1,7 +1,7 @@
 import "../assets/styles/form.css";
 import LoadingSpinner from "./LoadingSpinner";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Form = () => {
   const stepDescription = {
@@ -17,6 +17,7 @@ const Form = () => {
     4: ["Finishing up", "Double-check everything looks OK before confirming."],
   };
 
+  const [monthlyPayment, setMonthlyPayment] = useState(true);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -29,9 +30,24 @@ const Form = () => {
     },
   });
 
+  const [totalPrice, setTotalPrice] = useState(0);
+
   const [isLoading, setIsLoading] = useState(false);
   const [actualStep, setActualStep] = useState(1);
-  const [monthlyPayment, setMonthlyPayment] = useState(true);
+
+  useEffect(() => {
+    const planPrice =
+      (form.plan === "Arcade" ? 9 : form.plan === "Advanced" ? 12 : 15) *
+      (monthlyPayment ? 1 : 10);
+
+    const addonsPrice =
+      ((form.addons.onlineService ? 1 : 0) +
+        (form.addons.largerStorage ? 2 : 0) +
+        (form.addons.customizableProfile ? 2 : 0)) *
+      (monthlyPayment ? 1 : 10);
+
+    setTotalPrice(planPrice + addonsPrice);
+  }, [form, monthlyPayment]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -50,7 +66,9 @@ const Form = () => {
   return (
     <div className="form-container">
       <div className="form-side-bar">
-        <button onClick={() => console.log(form)}>test button</button>
+        <button onClick={() => console.log(form, totalPrice)}>
+          test button
+        </button>
         <div>
           <button
             onClick={() => {
@@ -230,6 +248,7 @@ const Form = () => {
                       setMonthlyPayment(!monthlyPayment);
                       console.log(monthlyPayment);
                     }}
+                    checked={monthlyPayment}
                   />
                   Yearly
                 </label>
@@ -297,7 +316,61 @@ const Form = () => {
           )}
 
           {actualStep === 4 && (
-            <div className="form-summary">Total (per month/year)</div>
+            <div className="form-summary">
+              <div>
+                <div>
+                  <div>
+                    <div>
+                      <p>
+                        {form.plan} {monthlyPayment ? "(Monthly)" : "(Yearly)"}
+                      </p>
+                      <button onClick={() => setActualStep(2)}>Change</button>
+                    </div>
+                    <p>
+                      $
+                      {(form.plan === "Arcade"
+                        ? 9
+                        : form.plan === "Advanced"
+                        ? 12
+                        : 15) * (monthlyPayment ? 1 : 10)}
+                      /{monthlyPayment ? "mo" : "yr"}
+                    </p>
+                  </div>
+                  <div>
+                    {form.addons.onlineService ? (
+                      <div>
+                        <p>Online service</p>
+                        <p>{monthlyPayment ? "+$1/mo" : "+$10/yr"}</p>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {form.addons.largerStorage ? (
+                      <div>
+                        <p>Larger Storage</p>
+                        <p>{monthlyPayment ? "+$2/mo" : "+$20/yr"}</p>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                    {form.addons.customizableProfile ? (
+                      <div>
+                        <p>Customizable profile</p>
+                        <p>{monthlyPayment ? "+$2/mo" : "+$20/yr"}</p>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <p>Total {monthlyPayment ? "(per month)" : "(per year)"}</p>
+                  <p>
+                    ${totalPrice}/{monthlyPayment ? "mo" : "yr"}
+                  </p>
+                </div>
+              </div>
+            </div>
           )}
 
           {actualStep === 5 && (
