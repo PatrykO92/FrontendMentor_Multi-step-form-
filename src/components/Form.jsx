@@ -131,7 +131,14 @@ const Form = () => {
           </p>
 
           {actualStep === 1 && (
-            <div className="form-your-info">
+            <form
+              className="form-your-info"
+              id="form-your-info"
+              onSubmit={(e) => {
+                e.preventDefault();
+                setActualStep(2);
+              }}
+            >
               <label>
                 Name
                 <input
@@ -140,6 +147,7 @@ const Form = () => {
                   onChange={handleInputChange}
                   type="text"
                   placeholder="e.g. Stephen King"
+                  maxLength={80}
                   required
                 ></input>
               </label>
@@ -151,6 +159,7 @@ const Form = () => {
                   onChange={handleInputChange}
                   type="email"
                   placeholder="e.g. stephenking@lorem.com"
+                  maxLength={80}
                   required
                 ></input>
               </label>
@@ -165,7 +174,7 @@ const Form = () => {
                   required
                 ></input>
               </label>
-            </div>
+            </form>
           )}
 
           {actualStep === 2 && (
@@ -375,31 +384,59 @@ const Form = () => {
 
           {actualStep === 5 && (
             <div className="form-success">
-              Thank you! Thanks for confirming your subscription! We hope you
-              have fun using our platform. If you ever need support, please feel
-              free to email us at support@loremgaming.com.
+              <div>
+                <span>Thank you!</span>{" "}
+                <p>
+                  Thanks for confirming your subscription! We hope you have fun
+                  using our platform. If you ever need support, please feel free
+                  to email us at support@loremgaming.com.
+                </p>
+              </div>
             </div>
           )}
 
-          <div className="form-navigation-buttons">
-            {actualStep === 1 ? (
-              <div></div>
-            ) : (
-              <button onClick={() => setActualStep((oldVal) => oldVal - 1)}>
-                Go Back
-              </button>
-            )}
+          {actualStep !== 5 ? (
+            <div className="form-navigation-buttons">
+              {actualStep === 1 ? (
+                <div></div>
+              ) : (
+                <button onClick={() => setActualStep((oldVal) => oldVal - 1)}>
+                  Go Back
+                </button>
+              )}
 
-            {actualStep === 4 ? (
-              <button onClick={() => console.log("Confirmation sent")}>
-                Confirm
-              </button>
-            ) : (
-              <button onClick={() => setActualStep((oldVal) => oldVal + 1)}>
-                Next Step
-              </button>
-            )}
-          </div>
+              {actualStep === 4 ? (
+                <button
+                  onClick={() => {
+                    console.log(
+                      `User sent to API!\n
+                      Name: ${form.name}\n
+                      Email: ${form.email}\n
+                      Phone: ${form.phone}\n
+                      Total price: ${totalPrice}$ per ${
+                        monthlyPayment ? "month" : "year"
+                      }\n
+                      Whole object:`,
+                      form
+                    );
+                    setActualStep(5);
+                  }}
+                >
+                  Confirm
+                </button>
+              ) : actualStep === 1 ? (
+                <button form="form-your-info" type="submit">
+                  Next Step
+                </button>
+              ) : (
+                <button onClick={() => setActualStep((oldVal) => oldVal + 1)}>
+                  Next Step
+                </button>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       )}
     </div>

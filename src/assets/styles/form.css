@@ -65,7 +65,7 @@
 .form-select-plan,
 .form-add-ons,
 .form-summary,
-.form-succes {
+.form-success {
   display: flex;
   flex: 1;
   flex-direction: column;
