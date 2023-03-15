@@ -35,20 +35,6 @@ const Form = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [actualStep, setActualStep] = useState(1);
 
-  useEffect(() => {
-    const planPrice =
-      (form.plan === "Arcade" ? 9 : form.plan === "Advanced" ? 12 : 15) *
-      (monthlyPayment ? 1 : 10);
-
-    const addonsPrice =
-      ((form.addons.onlineService ? 1 : 0) +
-        (form.addons.largerStorage ? 2 : 0) +
-        (form.addons.customizableProfile ? 2 : 0)) *
-      (monthlyPayment ? 1 : 10);
-
-    setTotalPrice(planPrice + addonsPrice);
-  }, [form, monthlyPayment]);
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
@@ -63,56 +49,53 @@ const Form = () => {
     }
   };
 
+  const changeStep = (step) => {
+    setIsLoading(true);
+    setActualStep(step);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  };
+
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    const planPrice =
+      (form.plan === "Arcade" ? 9 : form.plan === "Advanced" ? 12 : 15) *
+      (monthlyPayment ? 1 : 10);
+
+    const addonsPrice =
+      ((form.addons.onlineService ? 1 : 0) +
+        (form.addons.largerStorage ? 2 : 0) +
+        (form.addons.customizableProfile ? 2 : 0)) *
+      (monthlyPayment ? 1 : 10);
+
+    setTotalPrice(planPrice + addonsPrice);
+  }, [form, monthlyPayment]);
+
   return (
     <div className="form-container">
       <div className="form-side-bar">
-        <button onClick={() => console.log(form, totalPrice)}>
-          test button
-        </button>
         <div>
-          <button
-            onClick={() => {
-              setActualStep(1);
-            }}
-          >
-            1
-          </button>
+          <p className="form-side-bar-number">1</p>
           <p>
             <span>Step 1</span> Your info
           </p>
         </div>
         <div>
-          <button
-            onClick={() => {
-              setActualStep(2);
-            }}
-          >
-            2
-          </button>
+          <p className="form-side-bar-number">2</p>
           <p>
             <span>Step 2</span> Select Plan
           </p>
         </div>
         <div>
-          <button
-            onClick={() => {
-              setActualStep(3);
-            }}
-          >
-            3
-          </button>
+          <p className="form-side-bar-number">3</p>
           <p>
             <span>Step 3</span> Add-Ons
           </p>
         </div>
         <div>
-          <button
-            onClick={() => {
-              setActualStep(4);
-            }}
-          >
-            4
-          </button>
+          <p className="form-side-bar-number">4</p>
           <p>
             <span>Step 4</span> Summary
           </p>
@@ -125,18 +108,19 @@ const Form = () => {
         </div>
       ) : (
         <div className="form-main-container">
+          {/* Step description, depends on actual step */}
           <p>
             <span>{stepDescription[actualStep]?.[0]}</span>
             {stepDescription[actualStep]?.[1]}
           </p>
-
+          {/* Actual step */}
           {actualStep === 1 && (
             <form
               className="form-your-info"
               id="form-your-info"
               onSubmit={(e) => {
                 e.preventDefault();
-                setActualStep(2);
+                changeStep(2);
               }}
             >
               <label>
@@ -255,7 +239,6 @@ const Form = () => {
                     type="checkbox"
                     onChange={() => {
                       setMonthlyPayment(!monthlyPayment);
-                      console.log(monthlyPayment);
                     }}
                     checked={monthlyPayment}
                   />
@@ -395,12 +378,15 @@ const Form = () => {
             </div>
           )}
 
-          {actualStep !== 5 ? (
+          {/* Rendering navigation buttons, depends on actual step */}
+          {actualStep === 5 ? (
+            <></>
+          ) : (
             <div className="form-navigation-buttons">
               {actualStep === 1 ? (
                 <div></div>
               ) : (
-                <button onClick={() => setActualStep((oldVal) => oldVal - 1)}>
+                <button onClick={() => changeStep(actualStep - 1)}>
                   Go Back
                 </button>
               )}
@@ -410,16 +396,16 @@ const Form = () => {
                   onClick={() => {
                     console.log(
                       `User sent to API!\n
-                      Name: ${form.name}\n
-                      Email: ${form.email}\n
-                      Phone: ${form.phone}\n
-                      Total price: ${totalPrice}$ per ${
+                    Name: ${form.name}\n
+                    Email: ${form.email}\n
+                    Phone: ${form.phone}\n
+                    Total price: ${totalPrice}$ per ${
                         monthlyPayment ? "month" : "year"
                       }\n
-                      Whole object:`,
+                    Whole object:`,
                       form
                     );
-                    setActualStep(5);
+                    changeStep(5);
                   }}
                 >
                   Confirm
@@ -429,13 +415,11 @@ const Form = () => {
                   Next Step
                 </button>
               ) : (
-                <button onClick={() => setActualStep((oldVal) => oldVal + 1)}>
+                <button onClick={() => changeStep(actualStep + 1)}>
                   Next Step
                 </button>
               )}
             </div>
-          ) : (
-            <></>
           )}
         </div>
       )}

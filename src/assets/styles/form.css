@@ -33,13 +33,17 @@
   display: block;
 }
 
-.form-side-bar button {
+.form-side-bar-number {
+  background-color: red;
   border-radius: 50%;
   width: 2rem;
   height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.form-side-bar button:hover {
+.form-side-bar-number .active {
   background-color: blue;
 }
 
