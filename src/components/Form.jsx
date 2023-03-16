@@ -32,7 +32,7 @@ const Form = () => {
 
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [actualStep, setActualStep] = useState(1);
 
   const handleInputChange = (event) => {
@@ -57,7 +57,11 @@ const Form = () => {
     }, 500);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }, []);
 
   useEffect(() => {
     const planPrice =
@@ -77,27 +81,59 @@ const Form = () => {
     <div className="form-container">
       <div className="form-side-bar">
         <div>
-          <p className="form-side-bar-number">1</p>
+          <p
+            className={
+              actualStep === 1
+                ? "form-side-bar-number active"
+                : "form-side-bar-number"
+            }
+          >
+            1
+          </p>
           <p>
-            <span>Step 1</span> Your info
+            <span>STEP 1</span> YOUR INFO
           </p>
         </div>
         <div>
-          <p className="form-side-bar-number">2</p>
+          <p
+            className={
+              actualStep === 2
+                ? "form-side-bar-number active"
+                : "form-side-bar-number"
+            }
+          >
+            2
+          </p>
           <p>
-            <span>Step 2</span> Select Plan
+            <span>STEP 2</span> SELECT PLAN
           </p>
         </div>
         <div>
-          <p className="form-side-bar-number">3</p>
+          <p
+            className={
+              actualStep === 3
+                ? "form-side-bar-number active"
+                : "form-side-bar-number"
+            }
+          >
+            3
+          </p>
           <p>
-            <span>Step 3</span> Add-Ons
+            <span>STEP 3</span> ADD-ONS
           </p>
         </div>
         <div>
-          <p className="form-side-bar-number">4</p>
+          <p
+            className={
+              actualStep === 4
+                ? "form-side-bar-number active"
+                : "form-side-bar-number"
+            }
+          >
+            4
+          </p>
           <p>
-            <span>Step 4</span> Summary
+            <span>STEP 4</span> SUMMARY
           </p>
         </div>
       </div>
@@ -123,41 +159,39 @@ const Form = () => {
                 changeStep(2);
               }}
             >
-              <label>
-                Name
-                <input
-                  name="name"
-                  value={form.name}
-                  onChange={handleInputChange}
-                  type="text"
-                  placeholder="e.g. Stephen King"
-                  maxLength={80}
-                  required
-                ></input>
-              </label>
-              <label>
-                Email Addres
-                <input
-                  name="email"
-                  value={form.email}
-                  onChange={handleInputChange}
-                  type="email"
-                  placeholder="e.g. stephenking@lorem.com"
-                  maxLength={80}
-                  required
-                ></input>
-              </label>
-              <label>
-                Phone Number
-                <input
-                  name="phone"
-                  value={form.phone}
-                  onChange={handleInputChange}
-                  type="tel"
-                  placeholder="e.g. +1 234 567 890"
-                  required
-                ></input>
-              </label>
+              <label htmlFor="input-name">Name</label>
+              <input
+                id="input-name"
+                name="name"
+                value={form.name}
+                onChange={handleInputChange}
+                type="text"
+                placeholder="e.g. Stephen King"
+                maxLength={80}
+                required
+              ></input>
+
+              <label htmlFor="input-email">Email Address</label>
+              <input
+                id="input-email"
+                name="email"
+                value={form.email}
+                onChange={handleInputChange}
+                type="email"
+                placeholder="e.g. stephenking@lorem.com"
+                maxLength={80}
+                required
+              ></input>
+              <label htmlFor="input-phone">Phone Number</label>
+              <input
+                id="input-phone"
+                name="phone"
+                value={form.phone}
+                onChange={handleInputChange}
+                type="tel"
+                placeholder="e.g. +1 234 567 890"
+                required
+              ></input>
             </form>
           )}
 
@@ -316,7 +350,7 @@ const Form = () => {
                       <p>
                         {form.plan} {monthlyPayment ? "(Monthly)" : "(Yearly)"}
                       </p>
-                      <button onClick={() => setActualStep(2)}>Change</button>
+                      <button onClick={() => changeStep(2)}>Change</button>
                     </div>
                     <p>
                       $
@@ -386,13 +420,17 @@ const Form = () => {
               {actualStep === 1 ? (
                 <div></div>
               ) : (
-                <button onClick={() => changeStep(actualStep - 1)}>
+                <button
+                  className="back-button"
+                  onClick={() => changeStep(actualStep - 1)}
+                >
                   Go Back
                 </button>
               )}
 
               {actualStep === 4 ? (
                 <button
+                  className="button confirm-button"
                   onClick={() => {
                     console.log(
                       `User sent to API!\n
@@ -411,11 +449,14 @@ const Form = () => {
                   Confirm
                 </button>
               ) : actualStep === 1 ? (
-                <button form="form-your-info" type="submit">
+                <button className="button" form="form-your-info" type="submit">
                   Next Step
                 </button>
               ) : (
-                <button onClick={() => changeStep(actualStep + 1)}>
+                <button
+                  className="button"
+                  onClick={() => changeStep(actualStep + 1)}
+                >
                   Next Step
                 </button>
               )}
