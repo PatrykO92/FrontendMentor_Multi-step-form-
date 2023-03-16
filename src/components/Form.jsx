@@ -1,4 +1,12 @@
 import "../assets/styles/form.css";
+import {
+  iconAdvanced,
+  iconArcade,
+  iconCheckmark,
+  iconPro,
+  iconThankYou,
+} from "../assets/images";
+
 import LoadingSpinner from "./LoadingSpinner";
 
 import { useState, useEffect } from "react";
@@ -149,6 +157,7 @@ const Form = () => {
             <span>{stepDescription[actualStep]?.[0]}</span>
             {stepDescription[actualStep]?.[1]}
           </p>
+
           {/* Actual step */}
           {actualStep === 1 && (
             <form
@@ -197,8 +206,11 @@ const Form = () => {
 
           {actualStep === 2 && (
             <div className="form-select-plan">
-              <div>
-                <div>
+              <div className="select-plans">
+                <label
+                  className={form.plan === "Arcade" ? "selected-plan" : ""}
+                >
+                  <img src={iconArcade} alt="arcade plan" />
                   <input
                     type="radio"
                     id="plan-1"
@@ -207,7 +219,7 @@ const Form = () => {
                     onChange={handleInputChange}
                     checked={form.plan === "Arcade"}
                   />
-                  <label htmlFor="plan-1">
+                  <p htmlFor="plan-1">
                     Arcade
                     {monthlyPayment ? (
                       <p>
@@ -215,12 +227,16 @@ const Form = () => {
                       </p>
                     ) : (
                       <p>
-                        <span>$90/yr</span>2 months free
+                        <span>$90/yr</span>
+                        <b>2 months free</b>
                       </p>
                     )}
-                  </label>
-                </div>
-                <div>
+                  </p>
+                </label>
+                <label
+                  className={form.plan === "Advanced" ? "selected-plan" : ""}
+                >
+                  <img src={iconAdvanced} alt="advanced plan" />
                   <input
                     type="radio"
                     id="plan-2"
@@ -229,7 +245,7 @@ const Form = () => {
                     onChange={handleInputChange}
                     checked={form.plan === "Advanced"}
                   />
-                  <label htmlFor="plan-2">
+                  <p htmlFor="plan-2">
                     Advanced
                     {monthlyPayment ? (
                       <p>
@@ -237,12 +253,17 @@ const Form = () => {
                       </p>
                     ) : (
                       <p>
-                        <span>$120/yr</span>2 months free
+                        <span>$120/yr</span>
+                        <b>2 months free</b>
                       </p>
                     )}
-                  </label>
-                </div>
-                <div>
+                  </p>
+                </label>
+                <label
+                  htmlFor="plan-3"
+                  className={form.plan === "Pro" ? "selected-plan" : ""}
+                >
+                  <img src={iconPro} alt="pro plan" />
                   <input
                     type="radio"
                     id="plan-3"
@@ -251,7 +272,7 @@ const Form = () => {
                     onChange={handleInputChange}
                     checked={form.plan === "Pro"}
                   />
-                  <label htmlFor="plan-3">
+                  <p>
                     Pro
                     {monthlyPayment ? (
                       <p>
@@ -259,14 +280,15 @@ const Form = () => {
                       </p>
                     ) : (
                       <p>
-                        <span>$150/yr</span>2 months free
+                        <span>$150/yr</span>
+                        <b>2 months free</b>
                       </p>
                     )}
-                  </label>
-                </div>
+                  </p>
+                </label>
               </div>
 
-              <div>
+              <div className="monthly-yearly">
                 <label>
                   Monthly
                   <input
@@ -284,7 +306,10 @@ const Form = () => {
 
           {actualStep === 3 && (
             <div className="form-add-ons">
-              <div>
+              <label
+                htmlFor="online-services"
+                className={form.addons.onlineService ? "selected-plan" : ""}
+              >
                 <input
                   type="checkbox"
                   id="online-services"
@@ -293,16 +318,17 @@ const Form = () => {
                   onChange={handleInputChange}
                   checked={form.addons.onlineService}
                 />
-                <label htmlFor="online-services">
-                  <div>
-                    <p>
-                      <b>Online service</b>Access to multiplayer games
-                    </p>
-                    <p>{monthlyPayment ? "+$1/mo" : "+$10/yr"}</p>
-                  </div>
-                </label>
-              </div>
-              <div>
+
+                <div>
+                  <b>Online service</b>
+                  <span>Access to multiplayer games</span>
+                </div>
+                <p>{monthlyPayment ? "+$1/mo" : "+$10/yr"}</p>
+              </label>
+              <label
+                htmlFor="larger-storage"
+                className={form.addons.largerStorage ? "selected-plan" : ""}
+              >
                 <input
                   type="checkbox"
                   id="larger-storage"
@@ -311,16 +337,19 @@ const Form = () => {
                   onChange={handleInputChange}
                   checked={form.addons.largerStorage}
                 />
-                <label htmlFor="larger-storage">
-                  <div>
-                    <p>
-                      <b>Larger storage</b>Extra 1TB of cloud save
-                    </p>
-                    <p>{monthlyPayment ? "+$2/mo" : "+$20/yr"}</p>
-                  </div>
-                </label>
-              </div>
-              <div>
+
+                <div>
+                  <b>Larger storage</b>
+                  <span>Extra 1TB of cloud save</span>
+                </div>
+                <p>{monthlyPayment ? "+$2/mo" : "+$20/yr"}</p>
+              </label>
+              <label
+                htmlFor="custom-profile"
+                className={
+                  form.addons.customizableProfile ? "selected-plan" : ""
+                }
+              >
                 <input
                   type="checkbox"
                   id="custom-profile"
@@ -329,15 +358,13 @@ const Form = () => {
                   onChange={handleInputChange}
                   checked={form.addons.customizableProfile}
                 />
-                <label htmlFor="custom-profile">
-                  <div>
-                    <p>
-                      <b>Customizable Profile</b>Custom theme on your profile
-                    </p>
-                    <p>{monthlyPayment ? "+$2/mo" : "+$20/yr"}</p>
-                  </div>
-                </label>
-              </div>
+
+                <div>
+                  <b>Customizable Profile</b>
+                  <span>Custom theme on your profile</span>
+                </div>
+                <p>{monthlyPayment ? "+$2/mo" : "+$20/yr"}</p>
+              </label>
             </div>
           )}
 
