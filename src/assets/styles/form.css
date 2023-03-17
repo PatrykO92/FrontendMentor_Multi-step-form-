@@ -119,22 +119,28 @@
 
 .form-your-info {
   padding-top: 1rem;
+  gap: 0.2rem;
 }
 
 .form-your-info label,
 .form-your-info input {
-  display: block;
   color: var(--primary-color1);
   font-weight: 700;
-  margin-bottom: 1rem;
-  width: 100%;
 }
 
-.form-your-info label {
+.form-your-info input {
+  margin-bottom: 1.5rem;
+}
+
+.form-your-info > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.5rem;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
 }
+
 .form-your-info ::placeholder {
   color: var(--secondary-color1);
 }
@@ -146,9 +152,30 @@
   font-weight: 700;
 }
 
+.form-your-info input:invalid {
+  border: 1px solid transparent;
+  outline: 1px solid var(--primary-color5);
+}
+
+.error-message {
+  color: var(--primary-color5);
+  font-size: 0.7rem;
+  display: none;
+}
+
+.input-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+input:invalid + .input-container > .error-message {
+  display: block;
+}
+
 .form-your-info input:focus {
   border: 1px solid var(--primary-color2);
-  outline: none;
+  outline: 0;
 }
 
 .form-select-plan {

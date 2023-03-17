@@ -168,39 +168,59 @@ const Form = () => {
                 changeStep(2);
               }}
             >
-              <label htmlFor="input-name">Name</label>
-              <input
-                id="input-name"
-                name="name"
-                value={form.name}
-                onChange={handleInputChange}
-                type="text"
-                placeholder="e.g. Stephen King"
-                maxLength={80}
-                required
-              ></input>
+              <div>
+                <input
+                  id="input-name"
+                  name="name"
+                  value={form.name}
+                  onChange={handleInputChange}
+                  type="text"
+                  placeholder="e.g. Stephen King"
+                  minLength={6}
+                  maxLength={80}
+                  required
+                ></input>
+                <div className="input-container">
+                  <label htmlFor="input-name">Name</label>
+                  <span className="error-message">This field is required</span>
+                </div>
+              </div>
 
-              <label htmlFor="input-email">Email Address</label>
-              <input
-                id="input-email"
-                name="email"
-                value={form.email}
-                onChange={handleInputChange}
-                type="email"
-                placeholder="e.g. stephenking@lorem.com"
-                maxLength={80}
-                required
-              ></input>
-              <label htmlFor="input-phone">Phone Number</label>
-              <input
-                id="input-phone"
-                name="phone"
-                value={form.phone}
-                onChange={handleInputChange}
-                type="tel"
-                placeholder="e.g. +1 234 567 890"
-                required
-              ></input>
+              <div>
+                <input
+                  id="input-email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleInputChange}
+                  type="email"
+                  placeholder="e.g. stephenking@lorem.com"
+                  minLength={4}
+                  maxLength={80}
+                  required
+                ></input>
+                <div className="input-container">
+                  <label htmlFor="input-email">Email Address</label>
+                  <span className="error-message">This field is required</span>
+                </div>
+              </div>
+
+              <div>
+                <input
+                  id="input-phone"
+                  name="phone"
+                  value={form.phone}
+                  onChange={handleInputChange}
+                  type="tel"
+                  minLength={6}
+                  maxLength={25}
+                  placeholder="e.g. +1 234 567 890"
+                  required
+                ></input>
+                <div className="input-container">
+                  <label htmlFor="input-phone">Phone Number</label>
+                  <span className="error-message">This field is required</span>
+                </div>
+              </div>
             </form>
           )}
 
