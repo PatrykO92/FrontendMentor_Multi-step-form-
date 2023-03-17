@@ -289,17 +289,35 @@ const Form = () => {
               </div>
 
               <div className="monthly-yearly">
-                <label>
-                  Monthly
+                <div>
+                  <p
+                    style={
+                      !monthlyPayment ? { color: "hsl(213, 96%, 18%)" } : {}
+                    }
+                  >
+                    Yearly
+                  </p>
+                </div>
+                <div>
                   <input
+                    id="switch"
                     type="checkbox"
                     onChange={() => {
                       setMonthlyPayment(!monthlyPayment);
                     }}
                     checked={monthlyPayment}
                   />
-                  Yearly
-                </label>
+                  <label htmlFor="switch">Change monthly or Yearly</label>
+                </div>
+                <div>
+                  <p
+                    style={
+                      monthlyPayment ? { color: "hsl(213, 96%, 18%)" } : {}
+                    }
+                  >
+                    Monthly
+                  </p>
+                </div>
               </div>
             </div>
           )}
@@ -371,71 +389,68 @@ const Form = () => {
           {actualStep === 4 && (
             <div className="form-summary">
               <div>
-                <div>
+                <div className="summary-plan">
                   <div>
-                    <div>
-                      <p>
-                        {form.plan} {monthlyPayment ? "(Monthly)" : "(Yearly)"}
-                      </p>
-                      <button onClick={() => changeStep(2)}>Change</button>
-                    </div>
                     <p>
-                      $
-                      {(form.plan === "Arcade"
-                        ? 9
-                        : form.plan === "Advanced"
-                        ? 12
-                        : 15) * (monthlyPayment ? 1 : 10)}
-                      /{monthlyPayment ? "mo" : "yr"}
+                      {form.plan} {monthlyPayment ? "(Monthly)" : "(Yearly)"}
                     </p>
+                    <button onClick={() => changeStep(2)}>Change</button>
                   </div>
-                  <div>
-                    {form.addons.onlineService ? (
-                      <div>
-                        <p>Online service</p>
-                        <p>{monthlyPayment ? "+$1/mo" : "+$10/yr"}</p>
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {form.addons.largerStorage ? (
-                      <div>
-                        <p>Larger Storage</p>
-                        <p>{monthlyPayment ? "+$2/mo" : "+$20/yr"}</p>
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                    {form.addons.customizableProfile ? (
-                      <div>
-                        <p>Customizable profile</p>
-                        <p>{monthlyPayment ? "+$2/mo" : "+$20/yr"}</p>
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                </div>
-                <div>
-                  <p>Total {monthlyPayment ? "(per month)" : "(per year)"}</p>
                   <p>
-                    ${totalPrice}/{monthlyPayment ? "mo" : "yr"}
+                    $
+                    {(form.plan === "Arcade"
+                      ? 9
+                      : form.plan === "Advanced"
+                      ? 12
+                      : 15) * (monthlyPayment ? 1 : 10)}
+                    /{monthlyPayment ? "mo" : "yr"}
                   </p>
                 </div>
+                <div className="summary-add-ons">
+                  {form.addons.onlineService ? (
+                    <div>
+                      <p>Online service</p>
+                      <p>{monthlyPayment ? "+$1/mo" : "+$10/yr"}</p>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  {form.addons.largerStorage ? (
+                    <div>
+                      <p>Larger Storage</p>
+                      <p>{monthlyPayment ? "+$2/mo" : "+$20/yr"}</p>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  {form.addons.customizableProfile ? (
+                    <div>
+                      <p>Customizable profile</p>
+                      <p>{monthlyPayment ? "+$2/mo" : "+$20/yr"}</p>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+              <div>
+                <p>Total {monthlyPayment ? "(per month)" : "(per year)"}</p>
+                <b>
+                  ${totalPrice}/{monthlyPayment ? "mo" : "yr"}
+                </b>
               </div>
             </div>
           )}
 
           {actualStep === 5 && (
             <div className="form-success">
-              <div>
-                <span>Thank you!</span>{" "}
-                <p>
-                  Thanks for confirming your subscription! We hope you have fun
-                  using our platform. If you ever need support, please feel free
-                  to email us at support@loremgaming.com.
-                </p>
-              </div>
+              <img src={iconThankYou} alt="thank you!" />
+              <span>Thank you!</span>
+              <p>
+                Thanks for confirming your subscription! We hope you have fun
+                using our platform. If you ever need support, please feel free
+                to email us at support@loremgaming.com.
+              </p>
             </div>
           )}
 
