@@ -423,3 +423,40 @@
 .monthly-yearly label:active:after {
   width: 1.3rem;
 }
+
+@media only screen and (max-width: 860px) {
+  .form-main-container {
+    min-height: fit-content;
+  }
+
+  .form-side-bar {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0;
+    border-radius: 0;
+    background-image: url("../images/bg-sidebar-mobile.svg");
+    background-size: cover;
+    width: 100%;
+    height: 30%;
+  }
+
+  .step {
+    display: none;
+  }
+
+  .form-navigation-buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    height: 5rem;
+    background-color: var(--secondary-color5);
+  }
+}

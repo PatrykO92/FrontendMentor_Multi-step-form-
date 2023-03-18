@@ -100,7 +100,7 @@ const Form = () => {
           >
             1
           </p>
-          <p>
+          <p className="step">
             <span>STEP 1</span> YOUR INFO
           </p>
         </div>
@@ -114,7 +114,7 @@ const Form = () => {
           >
             2
           </p>
-          <p>
+          <p className="step">
             <span>STEP 2</span> SELECT PLAN
           </p>
         </div>
@@ -128,7 +128,7 @@ const Form = () => {
           >
             3
           </p>
-          <p>
+          <p className="step">
             <span>STEP 3</span> ADD-ONS
           </p>
         </div>
@@ -142,7 +142,7 @@ const Form = () => {
           >
             4
           </p>
-          <p>
+          <p className="step">
             <span>STEP 4</span> SUMMARY
           </p>
         </div>
