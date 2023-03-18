@@ -163,14 +163,14 @@
   display: none;
 }
 
+.form-your-info input:invalid + div > .error-message {
+  display: block;
+}
+
 .input-container {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-}
-
-input:invalid + .input-container > .error-message {
-  display: block;
 }
 
 .form-your-info input:focus {

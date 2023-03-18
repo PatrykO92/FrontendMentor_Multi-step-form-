@@ -38,6 +38,8 @@ const Form = () => {
     },
   });
 
+  const [isRequired, setIsRequired] = useState(false);
+
   const [totalPrice, setTotalPrice] = useState(0);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -176,13 +178,12 @@ const Form = () => {
                   onChange={handleInputChange}
                   type="text"
                   placeholder="e.g. Stephen King"
-                  minLength={6}
                   maxLength={80}
-                  required
+                  required={isRequired}
                 ></input>
                 <div className="input-container">
                   <label htmlFor="input-name">Name</label>
-                  <span className="error-message">This field is required</span>
+                  <span className="error-message">Name is required</span>
                 </div>
               </div>
 
@@ -194,13 +195,12 @@ const Form = () => {
                   onChange={handleInputChange}
                   type="email"
                   placeholder="e.g. stephenking@lorem.com"
-                  minLength={4}
                   maxLength={80}
-                  required
+                  required={isRequired}
                 ></input>
                 <div className="input-container">
                   <label htmlFor="input-email">Email Address</label>
-                  <span className="error-message">This field is required</span>
+                  <span className="error-message">Email is required</span>
                 </div>
               </div>
 
@@ -211,14 +211,13 @@ const Form = () => {
                   value={form.phone}
                   onChange={handleInputChange}
                   type="tel"
-                  minLength={6}
                   maxLength={25}
                   placeholder="e.g. +1 234 567 890"
-                  required
+                  required={isRequired}
                 ></input>
                 <div className="input-container">
                   <label htmlFor="input-phone">Phone Number</label>
-                  <span className="error-message">This field is required</span>
+                  <span className="error-message">Phone is required</span>
                 </div>
               </div>
             </form>
@@ -511,7 +510,12 @@ const Form = () => {
                   Confirm
                 </button>
               ) : actualStep === 1 ? (
-                <button className="button" form="form-your-info" type="submit">
+                <button
+                  className="button"
+                  form="form-your-info"
+                  type="submit"
+                  onClick={() => setIsRequired(true)}
+                >
                   Next Step
                 </button>
               ) : (
