@@ -227,8 +227,11 @@
 }
 
 .select-plans input {
-  height: 0;
-  width: 0;
+  position: absolute;
+  height: 0px;
+  width: 0px;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 
 .select-plans b {
@@ -383,9 +386,11 @@
 }
 
 .monthly-yearly input[type="checkbox"] {
-  height: 0;
-  width: 0;
-  display: block;
+  position: absolute;
+  height: 0px;
+  width: 0px;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 
 .monthly-yearly label {
